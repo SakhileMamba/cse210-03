@@ -1,0 +1,43 @@
+Parachute Game
+
+Director Class:
+	Parachute Class
+	Word Class
+	Terminal Services
+	is_playing: boolean
+
+		Director Methods:
+			Start game()
+			get_inputs()
+			do_updates()
+			do_outputs()
+
+Parachute Class:
+	Parachute array
+	
+		Parachute Method:
+			write_parachute()
+				Loop through array, print each line of array.
+			erase_parachute()
+				Keep track of parachute in an list. When index position 5 turns to x, game over.
+			no_parachute()
+				inform director that parachute is gone.
+
+Word Class:
+	List of words
+	Current word string
+	
+		Word Method:
+			blank_word()
+				length of word, print dashes by number of letters
+			letter_position()
+				loop through characters in the word string, find matches in guess, replace blanks
+			word_complete()
+				if word is completed, inform director of success
+
+Terminal Service:
+	
+	Terminal Service Methods:			
+			read_letter()
+			write_text()
+		
