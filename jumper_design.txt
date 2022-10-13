@@ -1,6 +1,7 @@
 Parachute Game
 
 Director Class:
+	(attributes):
 	Parachute Class
 	Word Class
 	Terminal Services
@@ -13,6 +14,7 @@ Director Class:
 			do_outputs()
 
 Parachute Class:
+	(attributes):
 	Parachute array
 	
 		Parachute Method:
@@ -24,6 +26,7 @@ Parachute Class:
 				inform director that parachute is gone.
 
 Word Class:
+	(attributes):
 	List of words
 	Current word string
 	
