@@ -29,3 +29,13 @@ class Parachute:
         """
         for i in self._chute: # This loops through the list and prints the item in each index position.
             print(i)
+
+    def draw_man(self):
+        """METHOD will draw the man
+                
+        Args:
+            self (Parachute): An instance of Parachute.
+        
+        """
+        for i in self._man: # This loops through the list and prints the item in each index position.
+            print(i)
