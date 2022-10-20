@@ -19,3 +19,13 @@ class Parachute:
         """
         self._chute = ["  ___  ", " /___\ ", " \   / ", "  \ /  "] # The "_" before chute means it's private.
         self._man = ["   o   ", "  /|\  ", "  / \  ", "", "^^^^^^^"]
+
+    def draw_chute(self):
+        """METHOD will draw the chute
+                
+        Args:
+            self (Parachute): An instance of Parachute.
+        
+        """
+        for i in self._chute: # This loops through the list and prints the item in each index position.
+            print(i)
