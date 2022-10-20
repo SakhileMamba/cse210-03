@@ -51,10 +51,14 @@ class Parachute:
             self._chute.pop(0) # Removes the item at index position 0. Note, if you don't specify an index position, pop() removes the last item on the list.
             for i in self._chute:
                 print(i)
-            for i in self._man:
-                print(i)
+            if len(self._chute) != 0: # This says, it the length of 'self._chute' does not (!) equal zero, loop through 'self._man' and print each index content.
+                for i in self._man:
+                    print(i)
 
         if len(self._chute) == 0:
+            self._man[0] = "   x   " # if the length gets to zero, changes the content of index position [0] in 'self._man' to an 'x' to replace the head of our man.
+            for i in self._man:
+                print(i)
             end_game = print(f"You fell!\n") # the \n adds a new blank line after this is printed. It's for formatting purposes to make it look better in the terminal.
             return end_game # This 'return' statement takes effect only when this 'if' statement is reached and true. It ends the program.
 
@@ -81,11 +85,15 @@ class Parachute:
                     self._chute.pop(0) # Removes the item at index position 0. Note, if you don't specify an index position, pop() removes the last item on the list.
                     for i in self._chute:
                         print(i)
-                    for i in self._man:
-                        print(i)
+                    if len(self._chute) != 0: # This says, it the length of 'self._chute' does not (!) equal zero, loop through 'self._man' and print each index content.
+                        for i in self._man:
+                            print(i)
 
                 if len(self._chute) == 0:
-                    print(f"You're dead!\n") # the \n adds a new blank line after this is printed. It's for formatting purposes to make it look better in the terminal.
+                    self._man[0] = "   x   " # if the length gets to zero, changes the content of index position [0] in 'self._man' to an 'x' to replace the head of our man.
+                    for i in self._man:
+                        print(i)
+                    print(f"You fell!\n") # the \n adds a new blank line after this is printed. It's for formatting purposes to make it look better in the terminal.
                     break # This 'break' statement takes effect only when this 'if' statement is reached and true. It ends the program.
                         
             else:
