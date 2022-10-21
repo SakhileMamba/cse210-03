@@ -12,7 +12,7 @@ class Word:
         for x in self.random_word:
             self.guess_state.append("_")
 
-        print(self.guess_state)
+        print(self.guess_state)  # Used in class test
 
     def check_guess_matches(self, guessed_character):
         if guessed_character in self.random_word:
@@ -22,12 +22,19 @@ class Word:
                     self.guess_state[i] = x
                 i += 1
 
-            print(self.guess_state)
-            print("".join(self.guess_state))
+            print(self.guess_state)  # Used in class test
+            print("".join(self.guess_state))  # Used in class test
+            return True
+        else:
+            return False
+
+    def word_match_complete(self):
+        if "".join(self.guess_state) == self.random_word:
             return True
         else:
             return False
 
 
+# What follows below is for testing the class
 word = Word()
 word.check_guess_matches('e')
