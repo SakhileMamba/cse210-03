@@ -62,7 +62,7 @@ class Parachute:
             end_game = print(f"You fell!\n") # the \n adds a new blank line after this is printed. It's for formatting purposes to make it look better in the terminal.
             return end_game # This 'return' statement takes effect only when this 'if' statement is reached and true. It ends the program.
 
-    """ THIS IS THE FUNCTION I USED FOR TESTING """
+    """ THIS IS THE FUNCTION I USED FOR TESTING. REMOVE EVERYTHING FROM HERE DOWN TO USE IN JUMPER PROGRAM """
     def erase_chute_test(self):
         valid_input = True
         while valid_input:
