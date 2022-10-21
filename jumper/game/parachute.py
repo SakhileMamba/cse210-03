@@ -1,3 +1,7 @@
+from game.terminal_service import TerminalService
+from game.letter import Letter
+from game.player import Player
+
 # This is our parachute class
 
 class Parachute:
@@ -19,7 +23,38 @@ class Parachute:
         """
         self._chute = ["  ___  ", " /___\ ", " \   / ", "  \ /  "] # The "_" before chute means it's private.
         self._man = ["   o   ", "  /|\  ", "  / \  ", "", "^^^^^^^"]
+        
+        """ Letter: word to guess.
+        is_playing: determine whether the player wants o continue or not.
+        terminal_service displays information on the screen.
+        Player: One guessing the word."""
+        self._is_playing = True
+        self._terminal_service = TerminalService
+        self._letter = Letter()
+        self._player = Player()
+    
+    def start_game(self):
+        """Starts the game"""
+        while self.is_playing:
+            self._get_input()
+            self._do_updates()
+            self._do_outputs()
 
+    def get_input(self):
+        """Player guesses letter"""
+        new_letter = self._terminal_service.read_letter("\nEnter a letter: [a-z]")
+        self._player.guess_letter(new_letter)
+
+    def do_updates(self):
+        """keeps track of what letter the player guessed"""
+        self._letter.watch_letter(self._letter)
+
+    def do_outputs(self):
+        """Produces a hint"""
+        hint = self.letter.get_hint()
+        self._terminal_service.write_text(hint)
+        if self._letter.is_found():
+            self._is_playing = False
     def draw_chute(self):
         """METHOD will draw the chute
                 
