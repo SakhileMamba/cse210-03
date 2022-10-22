@@ -52,8 +52,9 @@ class Director:
         if no_chute == None:
             letter_guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ") # 'read_letter()' can have prompts to ask user for letter input.
             self._guess = self._word.check_guess_matches(letter_guess) # calls the 'guessed_letter()' function from the Word() class held in 'self._word' instance. Passes the guessed letter from user input in the previous line to that function then stores the returned True or False in the 'self._guess' value defined in class variables
-        else:
-            print("Sorry, your parachute is gone...you lose!")
+        #else:
+        #    chute_gone = print("Sorry, your parachute is gone...you lose!")
+        #    return chute_gone
 
     def _do_updates(self):
         """Keeps watch on if the word is guessed an updates the parachute.
@@ -74,8 +75,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        parachute = self._parachute.erase_chute() #NEED TO REMOVE OR FIX Calls the 'draw_chute()' function from the Parachute() class
-        self._terminal_service.write_text(parachute) #NEED TO REMOVE OF FIX Uses the TerminalService() class and passes the variable value 'parachute' to the 'write_text()' Method function to draw the parachute
+        #parachute = self._parachute.erase_chute() #NEED TO REMOVE OR FIX Calls the 'draw_chute()' function from the Parachute() class
+        self._terminal_service.write_text("Sorry, your parachute is gone...you lose!") #NEED TO REMOVE OF FIX Uses the TerminalService() class and passes the variable value 'parachute' to the 'write_text()' Method function to draw the parachute
 
 
 """ NEXT LINES FOR TESTING ONLY """
