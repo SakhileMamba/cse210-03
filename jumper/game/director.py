@@ -2,9 +2,10 @@ from game.terminal_service import TerminalService
 from game.parachute import Parachute
 from game.word import Word
 
+
 class Director:
     """A person who directs the game. 
-    
+
     The responsibility of a Director is to control the sequence of play.
 
     Attributes:
@@ -16,58 +17,60 @@ class Director:
 
     def __init__(self):
         """Constructs a new Director.
-        
+
         Args:
             self (Director): an instance of Director.
         """
+        self._is_playing = True
+        self._letter_guess = ""
 
-        self._parachute = Parachute() # ATTRIBUTE calls the Parachute() class and creates an instance of it called self._hider.
-        self._is_playing = True # ATTRIBUTE sets the boolean 'True' to show we are currently playing
-        self._word = Word() # ATTRIBUTE calls the Word() class and creates an instance of it called self._word.
-        self._terminal_service = TerminalService() # ATTRIBUTE calls the TerminalService() class and creates an instance of TerminalService() and assigns it to self._terminal_service
-        self._guess = True # ATTRIBUTE this is a class variable for the guesses, default is set to True until overwritten by a function.
-    
+        self._parachute = Parachute()
+        self._word = Word()
+        self._terminal_service = TerminalService()
+
     def start_game(self):
         """Starts the game by running the main game loop.
-        
-        Args:
+
+        Args:230
             self (Director): an instance of Director.
         """
-        #self._parachute.draw_chute() # Draws the initial parachute
-        #self._parachute.draw_man() # Draws the initial man
-        while self._is_playing: # says, while 'self_is_playing' is True, keep running this loop.
-            self._get_inputs() # 'get_inputs()' method. Gets user input from TerminalService()
-            self._do_updates() # 'do_updates()' method. Advances the game one step
-            self._do_outputs() # 'do_outputs()' method. Sends output to TerminalService() do display to user
 
-    def _get_inputs(self): # This is a private (_) METHOD held in the Director class
+        while self._is_playing:
+            if self._word.word_match_complete == True:
+                self._terminal_service.write_text("Game won")
+                self._is_playing = False
+            elif len(self._parachute._chute) > 0:
+                self._do_outputs()
+                self._get_inputs()
+                self._do_updates()
+            # else:
+            #    self._terminal_service.write_text("Game Over")
+
+    def _get_inputs(self):
         """Gets input from the user.
 
         Args:
             self (Director): An instance of Director.
         """
-        self._word.print_clue()
-        no_chute = self._parachute.erase_chute(self._guess) # Passes the boolean True or False from 'self._guess' to the 'erase_chute()' function in the Parachute() class. Receives the returned boolean from 'self._parachute.erase_chute()' and stores it in the 'no_chute' variable
-        print(no_chute)
-        if no_chute == None:
-            letter_guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ") # 'read_letter()' can have prompts to ask user for letter input.
-            self._guess = self._word.check_guess_matches(letter_guess) # calls the 'guessed_letter()' function from the Word() class held in 'self._word' instance. Passes the guessed letter from user input in the previous line to that function then stores the returned True or False in the 'self._guess' value defined in class variables
-        else: # Need to move this part to _do_outputs()
-            chute_gone = print("Sorry, your parachute is gone...you lose!")
-            return chute_gone
+
+        self._letter_guess = self._terminal_service.read_text(
+            "\nGuess a letter [a-z]: ")
+        #self._guess = self._word.check_guess_matches(letter_guess)
 
     def _do_updates(self):
         """Keeps watch on if the word is guessed an updates the parachute.
 
         Args:
             self (Director): An instance of Director.
-        """       
-        word_complete = self._word.word_match_complete()
-        while word_complete == False:
-            word_complete = self._word.word_match_complete() # We run this again to check and see if the word_complete is now true.
-            self._get_inputs()
+        """
+        guess_correct = self._word.check_guess_matches(self._letter_guess)
 
+        self._parachute.erase_chute(guess_correct)
 
+        if len(self._parachute._chute) == 0:
+            self._is_playing = False
+       # if self._word.word_match_complete:
+        #   self._is_playing = False
 
     def _do_outputs(self):
         """Provides a hint for the seeker to use.
@@ -75,10 +78,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        #parachute = self._parachute.erase_chute() #NEED TO REMOVE OR FIX Calls the 'draw_chute()' function from the Parachute() class
-        self._terminal_service.write_text("Sorry, your parachute is gone...you lose!") #NEED TO REMOVE OF FIX Uses the TerminalService() class and passes the variable value 'parachute' to the 'write_text()' Method function to draw the parachute
-
-
-""" NEXT LINES FOR TESTING ONLY """
-#director = Director() # Creates in instance of the director class I can use to test functions.
-#director.start_game() # Runs the 'start_game()' function
+        self._terminal_service.write_text(self._word.clue())
+        self._terminal_service.write_text(self._parachute._chute)
+        self._terminal_service.write_text(self._parachute._man)
