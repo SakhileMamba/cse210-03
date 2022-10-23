@@ -69,8 +69,9 @@ class Director:
 
         if len(self._parachute._chute) == 0:
             self._is_playing = False
-       # if self._word.word_match_complete:
-        #   self._is_playing = False
+
+        if self._word.word_match_complete:
+            self._is_playing = False
 
     def _do_outputs(self):
         """Provides a hint for the seeker to use.

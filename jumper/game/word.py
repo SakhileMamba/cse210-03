@@ -32,6 +32,3 @@ class Word:
             return True
         else:
             return False
-
-#w = Word()
-# w.word_match_complete()

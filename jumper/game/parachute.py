@@ -28,7 +28,7 @@ class Parachute:
             for i in self._man:
                 print(i)
 
-        if answer == False:
+        elif answer == False:
             # Removes the item at index position 0. Note, if you don't specify an index position, pop() removes the last item on the list.
             self._chute.pop(0)
             for i in self._chute:
