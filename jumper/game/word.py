@@ -6,7 +6,8 @@ class Word:
     def __init__(self):
         self._word_list = ["fox", "cat", "happy", "drama",
                            "cartoons", "television", "biscuits", "wifi", "laptop"]
-        self._random_word = random.choice(self._word_list)
+        #self._random_word = random.choice(self._word_list)
+        self._random_word = "cat"
         self._guess_state = []
 
         for x in self._random_word:

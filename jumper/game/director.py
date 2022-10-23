@@ -36,15 +36,14 @@ class Director:
         """
 
         while self._is_playing:
-            if self._word.word_match_complete == True:
-                self._terminal_service.write_text("Game won")
-                self._is_playing = False
-            elif len(self._parachute._chute) > 0:
-                self._do_outputs()
-                self._get_inputs()
-                self._do_updates()
-            # else:
-            #    self._terminal_service.write_text("Game Over")
+            self._do_outputs()
+            self._get_inputs()
+            self._do_updates()
+
+        if (self._word.word_match_complete()):
+            self._terminal_service.write_text("You won")
+        else:
+            self._terminal_service.write_text("You lost")
 
     def _get_inputs(self):
         """Gets input from the user.
@@ -70,7 +69,7 @@ class Director:
         if len(self._parachute._chute) == 0:
             self._is_playing = False
 
-        if self._word.word_match_complete:
+        if self._word.word_match_complete():
             self._is_playing = False
 
     def _do_outputs(self):
@@ -80,5 +79,7 @@ class Director:
             self (Director): An instance of Director.
         """
         self._terminal_service.write_text(self._word.clue())
+        print()
         self._terminal_service.write_text(self._parachute._chute)
         self._terminal_service.write_text(self._parachute._man)
+        print()
